@@ -3,7 +3,7 @@ import { useState } from "react";
 import { AuthContext } from "./contexts";
 
 
-const authInitialValue = {
+export const authInitialValue = {
     userName: "",
     userId: "",
     role: "",

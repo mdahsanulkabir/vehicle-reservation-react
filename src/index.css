@@ -23,8 +23,10 @@ body {
   height: 100vh;
   width: 100%;
   max-width: 1280px;
+  background-color: rgb(255, 255, 255);
+  padding-inline: 20px;
   /* margin-inline: auto; */
-  border: 5px solid red;
+  /* border: 5px solid red; */
 }
 
 .login {
@@ -80,6 +82,45 @@ body {
   }
 }
 
+.layout {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+}
+
+
+nav {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 4px;
+  max-height: 40px;
+  margin-block: 16px;
+}
+
+.search-bar {
+  display: flex;
+}
+
+.search-text {
+  margin-left: 24px;
+  flex: 1;
+}
+
+.icon-group {
+  display: flex;
+}
+
+
+main {
+  flex-grow: 1;
+  overflow-y: auto;
+  margin-block : 16px
+}
+
+footer {
+  text-align: center;
+  font-weight: 700;
+}
 
 
 .timeline {
