@@ -1,3 +1,120 @@
+@import url("https://fonts.googleapis.com/css2?family=Nunito&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  /* min-height: 100vh; */
+  background-color: rgb(223, 233, 236);
+  display: flex;
+  justify-content: center;
+}
+
+#root {
+  /* flex-grow: 1; */
+  height: 100vh;
+  width: 100%;
+  max-width: 1280px;
+  /* margin-inline: auto; */
+  border: 5px solid red;
+}
+
+.login {
+  width: auto;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .login-content {
+    width: 500px;
+    height: auto;
+    border-radius: 15px;
+    padding: 16px;
+    box-shadow: 0 20px 50px 5px#235345;
+    box-shadow: 10px 2px 50px 5px#627b44;
+  }
+
+  h1 {
+    font-size: 1rem;
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+  }
+
+  h2 {
+    
+    text-align: center;
+    margin: 0 0 5px 0;
+    font-weight: bold;
+  }
+
+  h5,
+  h4 {
+    font-size: 1.25rem;
+    text-align: center;
+  }
+
+  h4 {
+    margin: 0 0 5px 0;
+  }
+
+  .login-form-content {
+    width: 90%;
+    margin-inline: auto;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 70%;
+      margin-inline: auto;
+    }
+  }
+}
+
+
+
+.timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.dock {
+  border: 1px solid #ccc;
+  margin-bottom: 20px;
+  padding: 10px;
+}
+
+.dock-slots {
+  display: flex;
+  flex-direction: column;
+}
+
+.time-slot {
+  border: 1px solid #e0e0e0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s;
+}
+
+.time-slot.reserved {
+  background-color: #ffcccc;
+}
+
+.time-slot.available {
+  background-color: #ccffcc;
+  cursor: pointer;
+}
+
+.time-slot:hover {
+  background-color: #e0f7fa;
+}
