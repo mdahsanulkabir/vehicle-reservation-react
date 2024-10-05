@@ -2,7 +2,7 @@
 import DarkModeOutlinedIcon from "@mui/icons-material/DarkModeOutlined";
 import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined";
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
-import { Box, IconButton } from "@mui/material";
+import { Box, IconButton, Typography } from "@mui/material";
 
 import SearchIcon from "@mui/icons-material/Search";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
@@ -32,7 +32,7 @@ const NavBar = () => {
                 onClick={() => navigate('/')}
 
             />
-
+            <Typography variant='h6' className="">Vehicle Booking App</Typography>
             <div className="flex">
                 <div className="search-bar border-blue-500 border-[1px] rounded-full">
                     <input className="search-text bg-blue-100 " type="text" name="" id="" />

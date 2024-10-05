@@ -91,7 +91,7 @@ body {
 
 nav {
   display: flex;
-  justify-content: space-between;
+  justify-content: space-between;;
   border-radius: 4px;
   max-height: 40px;
   margin-block: 16px;
@@ -123,39 +123,55 @@ footer {
 }
 
 
+
 .timeline {
   display: flex;
   flex-direction: column;
+  width: 100%;
 }
 
-.dock {
-  border: 1px solid #ccc;
-  margin-bottom: 20px;
-  padding: 10px;
+.timeline-header, 
+.dock-row {
+  display: grid;
+  grid-template-columns: 100px repeat(96, 1fr); /* 100px for dock name, 96 for 15-min slots */
+  align-items: center;
+  border-bottom: 1px solid #ccc;
 }
 
-.dock-slots {
-  display: flex;
-  flex-direction: column;
+.hour-header, 
+.time-slot {
+  padding: 0px; /* Reduced padding */
+  max-width: 8px;
+  text-align: center;
+  border-right: 1px solid #ccc;
+  font-size: 0.75rem; /* Smaller font size */
 }
 
 .time-slot {
-  border: 1px solid #e0e0e0;
+  height: 30px; /* Adjust as needed */
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.3s;
+  border: 1px solid #ccc;
 }
 
 .time-slot.reserved {
-  background-color: #ffcccc;
+  background-color: #f53123; /* Light orange for reserved slots */
+  color: white; /* Ensure text is readable */
 }
 
 .time-slot.available {
-  background-color: #ccffcc;
-  cursor: pointer;
+  background-color: #d3f9d8; /* Light green for available slots */
 }
 
-.time-slot:hover {
-  background-color: #e0f7fa;
+
+.dock-header {
+  font-weight: bold;
+  text-align: left;
+  padding: 5px;
+}
+
+/* Adjust styles for merged hour headers */
+.hour-header {
+  grid-column: span 4; /* Merge 4 columns */
 }

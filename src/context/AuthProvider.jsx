@@ -7,16 +7,17 @@ export const authInitialValue = {
     userName: "",
     userId: "",
     role: "",
-    accessToken: ""
+    accessToken: "",
+    user_id: ""
 }
 
 
-const AuthProvider = ({children}) => {
+const AuthProvider = ({ children }) => {
     const [auth, setAuth] = useState(authInitialValue);
     const [persist, setPersist] = useState(JSON.parse(localStorage.getItem("persist") ?? false));
     return (
-        <AuthContext.Provider value={{ auth, setAuth, persist, setPersist}}>
-            { children }
+        <AuthContext.Provider value={{ auth, setAuth, persist, setPersist }}>
+            {children}
         </AuthContext.Provider>
     );
 };

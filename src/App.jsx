@@ -8,6 +8,10 @@ import Admin from "./pages/Admin";
 import Home from "./pages/Home";
 import PersistLogin from "./components/PersistLogin";
 import Layout from "./components/Layout";
+import BookingImport from "./pages/BookingImport";
+import TestTheGrid from "./pages/TestTheGrid";
+import TestTheGridFromDB from "./pages/TestTheGridFromDB";
+import TestTheGridFromDB2 from "./pages/TestTheGridFromDB2";
 // import Layout from "./components/Layout";
 // import Register from "./pages/Register";
 
@@ -29,8 +33,12 @@ function App() {
           } />}>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="booking" element={<div><h1>Book a schedule</h1></div>} />
+              <Route path="booking" element={<BookingImport />} />
               <Route path="timeline" element={<Timeline />} />
+              <Route path="test" element={<TestTheGrid />} />
+              <Route path="testfromdb" element={<TestTheGridFromDB />} />
+              <Route path="testfromdb2" element={<TestTheGridFromDB2 />} />
+
               <Route element={<RequireAuth allowedRoles={[import.meta.env.VITE_ADMIN_ROLE]} />}>
                 <Route path="admin" element={<Admin />} />
                 <Route path="create-user" element={<div><h1>Create User</h1></div>} />

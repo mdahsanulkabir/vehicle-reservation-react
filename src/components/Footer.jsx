@@ -2,7 +2,7 @@
 const Footer = () => {
     return (
         <div>
-            <p>Copyright &copy; Mohammed Ahsanul Kabir</p>
+            <p>Singer Bangladesh Limited</p>
         </div>
     );
 };
