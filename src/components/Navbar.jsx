@@ -10,6 +10,8 @@ import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
 import { authInitialValue } from "../context/AuthProvider";
 
+import logo from "../../src/assets/logo.svg"
+
 
 const NavBar = () => {
     const { setAuth, setPersist } = useAuth();
@@ -26,7 +28,7 @@ const NavBar = () => {
         <nav>
             <Box
                 component="img"
-                src="../../src/assets/logo.svg"
+                src={logo}
                 alt="beko logo"
                 sx={{ width: 60, p: 0, m: 0 }}
                 onClick={() => navigate('/')}
