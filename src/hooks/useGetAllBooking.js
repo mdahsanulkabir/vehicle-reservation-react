@@ -5,7 +5,7 @@ import useAxiosIntercept from "./useAxiosIntercept";
 
 
 
-export const useGetAllBooking = () => {
+export const useGetAllBooking = (bookingDate, bookingTime) => {
     const axiosPrivate = useAxiosIntercept();
     const [allBookingCreatedEver, setAllBookingCreatedEver] = useState([])
     useEffect(() => {
@@ -32,6 +32,6 @@ export const useGetAllBooking = () => {
             }
         }
         loadData();
-    }, [axiosPrivate])
+    }, [axiosPrivate, bookingDate, bookingTime])
     return allBookingCreatedEver;
 };

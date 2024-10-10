@@ -1,54 +1,59 @@
 /* eslint-disable react/prop-types */
-import { Button } from "@mui/material";
-import { useRef, useState } from "react";
+
+import { Button, Typography } from "@mui/material";
 
 
-const SelectDate = ({setShowSelectedDateTime, setShowDate, setShowNoAvailableDock}) => {
-    const [showError, setShowError] = useState(false);
-    const dateRef = useRef('');
-    const timeRef = useRef('');
+const SelectDate = ({ goForBooking, setGoForBooking, setShowBookingForm, bookingDate, setBookingDate, bookingTime, setBookingTime, setShowNoAvailableDock, setSummary }) => {
+    
+    console.log("show date: ", bookingDate, " and Show time: ", bookingTime)
 
-    const handleDateChange = () => {
+    const handleChangeTime = (e) => {
+        setBookingTime(e.target.value)
         setShowNoAvailableDock(false)
-        const selectedDate = dateRef.current.value + "T" + timeRef.current.value; // Access the input value through the ref
-        const reservationSchedule = new Date(selectedDate)
-        console.log("reservation booking date time", reservationSchedule)
-
-
-        if (reservationSchedule.getHours() < 7 || reservationSchedule.getHours() > 14) {
-            console.log("You are trying to schedule beyond allowed time. \n Please schedule between 7:00 am to 2:59 pm")
-            setShowError(true)
-            return null;
-        } else {
-            setShowSelectedDateTime(reservationSchedule)
-        }
-
-        if (selectedDate) {
-            //setShowDate(selectedDate + 'T00:00'); // Set the date with time as midnight in local time
-            console.log('Selected Date:', dateRef.current.value);
-            setShowDate(dateRef.current.value)
-
-        } else {
-            console.log('No date selected');
-        }
+        setShowBookingForm(true)
+        setSummary(false)
     };
+
+    
+
     return (
         <>
-            {
-                showError && (
-                    <div className="absolute top-[500px] left-[500px] z-30 border border-x-lime-800 flex flex-col text-center">
-                        <h1>Your schedule time is not ok</h1>
-                        <Button variant="contained" onClick={() => setShowError(false)}>OK</Button>
+            <div className="flex justify-between">
+                <div className="flex justify-center ">
+                    <div> <Typography variant="h6">{bookingDate ? "Your selected date is" : "Select the date you are interested in"} :</Typography></div>
+                    <div className="flex gap-4">
+                        <input type="date" disabled={goForBooking} className="bg-blue-600 text-sky-200" value={bookingDate} onChange={
+                            (e) => setBookingDate(e.target.value)
+                        } />
                     </div>
+                </div>
+                {
+                    bookingDate && !goForBooking && <div className="flex justify-center ">
+                        <Button variant="contained" onClick={() => {setGoForBooking(true); setBookingTime("")}}>Create a Reservation</Button>
+                    </div>
+                }
+            </div>
+
+            {
+                goForBooking && (
+                    <>
+                        <div className="flex mt-2 align-middle">
+                            <div>
+                                <Typography variant="h6">Select a time for reservation :</Typography>
+                            </div>
+                            <input
+                                type="time"
+                                className="bg-blue-600 text-sky-200"
+                                value={bookingTime}
+                                onChange={(e) => handleChangeTime(e)}
+                            />
+                            <span>(7:00 am - 2:59 pm)</span>
+                        </div>
+                        {/* <Button variant="contained" onClick={handleDateChange}>Select The Date</Button> */}
+                    </>
                 )
             }
-            <div>Select your schedule time</div>
-            <div className="flex gap-4">
 
-                <input type="date" ref={dateRef} />
-                <input type="time" ref={timeRef} /> (7:00 am - 2:59 pm)
-            </div>
-            <Button variant="contained" onClick={handleDateChange}>Select The Date</Button>
         </>
     );
 };
