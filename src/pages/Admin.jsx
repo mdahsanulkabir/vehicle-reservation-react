@@ -1,17 +1,23 @@
 
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import Users from "../components/Users";
+import { Button } from "@mui/material";
 
 
 const Admin = () => {
+    const navigate = useNavigate()
     return (
         <section>
-            <h1>Admins Page</h1>
+            <h1>{`Admin's Page`}</h1>
             <br />
             <Users />
             <br />
-            <div className="flexGrow">
-                <Link to="/">Home</Link>
+            <div className="text-center">
+                <Button
+                    variant="contained"
+                    onClick={() => navigate('/')}>
+                    Go Home
+                </Button>
             </div>
         </section>
     );

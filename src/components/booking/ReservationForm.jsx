@@ -108,7 +108,6 @@ const ReservationForm = ({ bookingDate, bookingTime, setShowBookingForm, setShow
                 <FormControl fullWidth>
                     <InputLabel id="select-containerSize-label">Select Container Size</InputLabel>
                     <Select
-                        labelId="select-containerSize-label"
                         id="select-containerSize"
                         value={containerSize}
                         label="Container Size"

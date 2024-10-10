@@ -1,185 +1,124 @@
-// import { useRef, useState, useEffect } from "react";
-// import { faCheck, faTimes, faInfoCircle } from "@fortawesome/free-solid-svg-icons";
-// import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-// // import axios from './api/axios';
-
-// const USER_REGEX = /^[A-z][A-z0-9-_]{3,23}$/;
-// const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
-// // const REGISTER_URL = '/register';
-
-// const Register = () => {
-//     const userRef = useRef();
-//     const errRef = useRef();
-
-//     const [user, setUser] = useState('');
-//     const [validName, setValidName] = useState(false);
-//     const [userFocus, setUserFocus] = useState(false);
-
-//     const [pwd, setPwd] = useState('');
-//     const [validPwd, setValidPwd] = useState(false);
-//     const [pwdFocus, setPwdFocus] = useState(false);
-
-//     const [matchPwd, setMatchPwd] = useState('');
-//     const [validMatch, setValidMatch] = useState(false);
-//     const [matchFocus, setMatchFocus] = useState(false);
-
-//     const [errMsg, setErrMsg] = useState('');
-//     const [success, setSuccess] = useState(true);
-
-//     useEffect(() => {
-//         userRef.current.focus();
-//     }, [])
-
-//     useEffect(() => {
-//         setValidName(USER_REGEX.test(user));
-//     }, [user])
-
-//     useEffect(() => {
-//         setValidPwd(PWD_REGEX.test(pwd));
-//         setValidMatch(pwd === matchPwd);
-//     }, [pwd, matchPwd])
-
-//     useEffect(() => {
-//         setErrMsg('');
-//     }, [user, pwd, matchPwd])
-
-//     const handleSubmit = async (e) => {
-//         e.preventDefault();
-//         // if button enabled with JS hack
-//         const v1 = USER_REGEX.test(user);
-//         const v2 = PWD_REGEX.test(pwd);
-//         if (!v1 || !v2) {
-//             setErrMsg("Invalid Entry");
-//             return;
-//         }
-//         console.log({user, pwd})
-//         // try {
-//         //     const response = await axios.post(REGISTER_URL,
-//         //         JSON.stringify({ user, pwd }),
-//         //         {
-//         //             headers: { 'Content-Type': 'application/json' },
-//         //             withCredentials: true
-//         //         }
-//         //     );
-//         //     console.log(response?.data);
-//         //     console.log(response?.accessToken);
-//         //     console.log(JSON.stringify(response))
-//         //     setSuccess(true);
-//         //     //clear state and controlled inputs
-//         //     //need value attrib on inputs for this
-//         //     setUser('');
-//         //     setPwd('');
-//         //     setMatchPwd('');
-//         // } catch (err) {
-//         //     if (!err?.response) {
-//         //         setErrMsg('No Server Response');
-//         //     } else if (err.response?.status === 409) {
-//         //         setErrMsg('Username Taken');
-//         //     } else {
-//         //         setErrMsg('Registration Failed')
-//         //     }
-//         //     errRef.current.focus();
-//         // }
-//     }
-
-//     return (
-//         <>
-//             {success ? (
-//                 <section>
-//                     <h1>Success!</h1>
-//                     <p>
-//                         <a href="#">Sign In</a>
-//                     </p>
-//                 </section>
-//             ) : (
-//                 <section>
-//                     <p ref={errRef} className={errMsg ? "errmsg" : "offscreen"} aria-live="assertive">{errMsg}</p>
-//                     <h1>Register</h1>
-//                     <form onSubmit={handleSubmit}>
-//                         <label htmlFor="username">
-//                             Username:
-//                             <FontAwesomeIcon icon={faCheck} className={validName ? "valid" : "hide"} />
-//                             <FontAwesomeIcon icon={faTimes} className={validName || !user ? "hide" : "invalid"} />
-//                         </label>
-//                         <input
-//                             type="text"
-//                             id="username"
-//                             ref={userRef}
-//                             autoComplete="off"
-//                             onChange={(e) => setUser(e.target.value)}
-//                             value={user}
-//                             required
-//                             aria-invalid={validName ? "false" : "true"}
-//                             aria-describedby="uidnote"
-//                             onFocus={() => setUserFocus(true)}
-//                             onBlur={() => setUserFocus(false)}
-//                         />
-//                         <p id="uidnote" className={userFocus && user && !validName ? "instructions" : "offscreen"}>
-//                             <FontAwesomeIcon icon={faInfoCircle} />
-//                             4 to 24 characters.<br />
-//                             Must begin with a letter.<br />
-//                             Letters, numbers, underscores, hyphens allowed.
-//                         </p>
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Typography } from "@mui/material";
+import { useState } from "react";
+import useAxiosIntercept from "../hooks/useAxiosIntercept";
+import { useNavigate } from "react-router-dom";
 
 
-//                         <label htmlFor="password">
-//                             Password:
-//                             <FontAwesomeIcon icon={faCheck} className={validPwd ? "valid" : "hide"} />
-//                             <FontAwesomeIcon icon={faTimes} className={validPwd || !pwd ? "hide" : "invalid"} />
-//                         </label>
-//                         <input
-//                             type="password"
-//                             id="password"
-//                             onChange={(e) => setPwd(e.target.value)}
-//                             value={pwd}
-//                             required
-//                             aria-invalid={validPwd ? "false" : "true"}
-//                             aria-describedby="pwdnote"
-//                             onFocus={() => setPwdFocus(true)}
-//                             onBlur={() => setPwdFocus(false)}
-//                         />
-//                         <p id="pwdnote" className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
-//                             <FontAwesomeIcon icon={faInfoCircle} />
-//                             8 to 24 characters.<br />
-//                             Must include uppercase and lowercase letters, a number and a special character.<br />
-//                             Allowed special characters: <span aria-label="exclamation mark">!</span> <span aria-label="at symbol">@</span> <span aria-label="hashtag">#</span> <span aria-label="dollar sign">$</span> <span aria-label="percent">%</span>
-//                         </p>
+const Register = () => {
+    const axiosPrivate = useAxiosIntercept();
+    const [name, setName] = useState("")
+    const [userId, setUserId] = useState("")
+    const [userEmail, setUserEmail] = useState("")
+    const [roleId, setRoleId] = useState('')
+    const [newUser, setNewUser] = useState({})
+    const navigate = useNavigate();
 
+    const handleCreateUser = async () => {
+        const user = {
+            name,
+            userId,
+            email: userEmail,
+            roleId
+        }
+        try {
+            const response = await axiosPrivate.post(`${import.meta.env.VITE_BACKEND_SERVER}/user`,
+                JSON.stringify(user),
+                {
+                    headers: { "Content-Type": "application/json" },
+                    withCredentials: true
+                }
+            );
+            const savedUser = await response.data
+            console.log("saved user: ", savedUser)
+            setNewUser(savedUser)
 
-//                         <label htmlFor="confirm_pwd">
-//                             Confirm Password:
-//                             <FontAwesomeIcon icon={faCheck} className={validMatch && matchPwd ? "valid" : "hide"} />
-//                             <FontAwesomeIcon icon={faTimes} className={validMatch || !matchPwd ? "hide" : "invalid"} />
-//                         </label>
-//                         <input
-//                             type="password"
-//                             id="confirm_pwd"
-//                             onChange={(e) => setMatchPwd(e.target.value)}
-//                             value={matchPwd}
-//                             required
-//                             aria-invalid={validMatch ? "false" : "true"}
-//                             aria-describedby="confirmnote"
-//                             onFocus={() => setMatchFocus(true)}
-//                             onBlur={() => setMatchFocus(false)}
-//                         />
-//                         <p id="confirmnote" className={matchFocus && !validMatch ? "instructions" : "offscreen"}>
-//                             <FontAwesomeIcon icon={faInfoCircle} />
-//                             Must match the first password input field.
-//                         </p>
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
-//                         <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
-//                     </form>
-//                     <p>
-//                         Already registered?<br />
-//                         <span className="line">
-//                             {/*put router link here*/}
-//                             <a href="#">Sign In</a>
-//                         </span>
-//                     </p>
-//                 </section>
-//             )}
-//         </>
-//     )
-// }
+    return (
+        <div>
+            {
+                newUser?._id ? (
+                    <>
+                        <Typography variant="h6" color="primary" className="text-center my-4">New User Created with following credentials</Typography>
+                        <div className="w-1/2 my-8 mx-auto border-2 p-4 rounded-md flex flex-col gap-4">
+                            <p>{`User Name :  ${newUser.name}`}</p>
+                            <p>{`User ID :    ${newUser.userId}`}</p>
+                            <p>{`User Email : ${newUser.email}`}</p>
+                            <p>{`User Role :  ${newUser.roleId.role}`}</p>
+                        </div>
+                        <div className="text-center">
+                            <Button
+                                variant="contained"
+                                onClick={() => navigate('/')}>
+                                Go Home
+                            </Button>
+                        </div>
+                    </>
+                ) : (
+                    <>
+                        <Typography variant="h6" color="primary" className="text-center my-4">Register User</Typography>
+                        <form className="w-1/2 my-8 mx-auto border-2 p-4 rounded-md flex flex-col gap-4">
+                            <Typography variant="h6" className="text-center pb-4">Provide User Credentials</Typography>
+                            <TextField
+                                label="User Name"
+                                size="small"
+                                variant="outlined"
+                                type="text"
+                                value={name}
+                                onChange={e => setName(e.target.value)}
+                            />
+                            <TextField
+                                label="User ID"
+                                size="small"
+                                variant="outlined"
+                                type="text"
+                                value={userId}
+                                onChange={e => setUserId(e.target.value)}
+                            />
+                            <TextField
+                                label="User Email"
+                                size="small"
+                                variant="outlined"
+                                type="text"
+                                value={userEmail}
+                                onChange={e => setUserEmail(e.target.value)}
+                            />
 
-// export default Register
+                            {/* inputs to select rolse */}
+                            <FormControl >
+                                <InputLabel id="select-material-label">Select User Role</InputLabel>
+                                <Select
+                                    labelId="select-material-label"
+                                    id="select-material"
+                                    value={roleId}
+                                    label="Material"
+                                    onChange={e => setRoleId(e.target.value)}
+                                >
+                                    <MenuItem value={"66f4ef9a9cb10111ad517507"}>Admin</MenuItem>
+                                    <MenuItem value={"66f6bbec7f38d8f4d48a6573"}>Import Booker</MenuItem>
+                                    <MenuItem value={"66f6c1bb7f38d8f4d48a6588"}>Local Booker</MenuItem>
+                                    <MenuItem value={"66f6bfcd7f38d8f4d48a657e"}>Factory person</MenuItem>
+                                    <MenuItem value={"66f6c1c67f38d8f4d48a658a"}>FG Booker</MenuItem>
+                                </Select>
+                            </FormControl>
+
+                            <div className="text-center">
+                                <Button
+                                    variant="contained"
+                                    disabled={!(name && userId && userEmail && roleId)}
+                                    onClick={() => handleCreateUser()}>
+                                    Create User
+                                </Button>
+                            </div>
+                        </form>
+                    </>
+                )
+            }
+        </div>
+    );
+};
+
+export default Register;
