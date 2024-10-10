@@ -12,6 +12,7 @@ import BookingImport from "./pages/BookingImport";
 import TestTheGrid from "./pages/TestTheGrid";
 import TestTheGridFromDB from "./pages/TestTheGridFromDB";
 import TestTheGridFromDB2 from "./pages/TestTheGridFromDB2";
+import Booking from "./pages/Booking";
 // import Layout from "./components/Layout";
 // import Register from "./pages/Register";
 
@@ -33,7 +34,8 @@ function App() {
           } />}>
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
-              <Route path="booking" element={<BookingImport />} />
+              <Route path="booking" element={<Booking />} />
+              <Route path="booking2" element={<BookingImport />} />
               <Route path="timeline" element={<Timeline />} />
               <Route path="test" element={<TestTheGrid />} />
               <Route path="testfromdb" element={<TestTheGridFromDB />} />
