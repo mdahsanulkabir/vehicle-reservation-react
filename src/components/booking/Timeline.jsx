@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 // this component is used to draw timeline
 
-export const Timeline = ({ allReservationsOfTheSelectedDate, docks, showDate }) => {
+import { Typography } from "@mui/material";
+
+export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate }) => {
 
     const reservationsAsPerDocks = docks.map(dock => {
         const currentDock = {
@@ -48,7 +50,7 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, showDate }) 
             // iteration is based on checking status of each timeSlot
 
             // slot time will take the numeric value of each time slots, and using below 'slotTime' we can get the STARTING TIME of that slot
-            const currentSlotStartTime = new Date(new Date(showDate).setHours(0, 0, 0, 0) + timeSlot * 60 * 1000);
+            const currentSlotStartTime = new Date(new Date(bookingDate).setHours(0, 0, 0, 0) + timeSlot * 60 * 1000);
             // const currentSlotStartTime = new Date(new Date('2024-10-27').setHours(0, 0, 0, 0) + timeSlot * 60 * 1000);
 
 
@@ -91,25 +93,28 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, showDate }) 
 
 
     return (
-        <div className="timeline">
-            <div className="timeline-header">
-                <div className="dock-header">Dock</div>
-                {Array.from({ length: 24 }, (_, hour) => (
-                    <div key={`header-${hour}`} className="hour-header">
-                        {hour}:00
-                    </div>
-                ))}
-            </div>
-            {
-                reservationsAsPerDocks.map((dock) => {
-                    return (
-                        <div key={dock._id} className="dock-row">
-                            <div className="dock-name">{`Dock ${dock.dockNumber}`}</div>
-                            {renderSlots(dock)}
+        <div className="my-8">
+            <Typography variant='h6' sx={{ fontWeight: 'bold' }}>{`Reservation distribution on ${bookingDate}`}</Typography>
+            <div className="timeline">
+                <div className="timeline-header">
+                    <div className="dock-header">Dock</div>
+                    {Array.from({ length: 24 }, (_, hour) => (
+                        <div key={`header-${hour}`} className="hour-header">
+                            {hour}:00
                         </div>
-                    )
-                })
-            }
+                    ))}
+                </div>
+                {
+                    reservationsAsPerDocks.map((dock) => {
+                        return (
+                            <div key={dock._id} className="dock-row">
+                                <div className="dock-name">{`Dock ${dock.dockNumber}`}</div>
+                                {renderSlots(dock)}
+                            </div>
+                        )
+                    })
+                }
+            </div>
         </div>
     );
 };

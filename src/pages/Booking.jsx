@@ -10,7 +10,7 @@ import { useGetAllBooking } from "../hooks/useGetAllBooking";
 import Summary from "../components/booking/Summary";
 import BookingConfirmation from "../components/booking/BookingConfirmation";
 
-const TestTheGridFromDB2 = () => {
+const Booking = () => {
 
     const allDocks = useGetAllDocks();
     const [bookingDate, setBookingDate] = useState('')
@@ -97,4 +97,4 @@ const TestTheGridFromDB2 = () => {
     );
 };
 
-export default TestTheGridFromDB2;
+export default Booking;
