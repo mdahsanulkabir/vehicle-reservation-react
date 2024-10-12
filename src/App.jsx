@@ -8,8 +8,9 @@ import Home from "./pages/Home";
 import PersistLogin from "./components/PersistLogin";
 import Layout from "./components/Layout";
 import Booking from "./pages/Booking";
-// import Layout from "./components/Layout";
 import Register from "./pages/Register";
+import CreateMaterial from "./pages/CreateMaterial";
+import LoadingTime from "./pages/LoadingTime";
 
 function App() {
   return (
@@ -34,6 +35,8 @@ function App() {
               <Route element={<RequireAuth allowedRoles={[import.meta.env.VITE_ADMIN_ROLE]} />}>
                 <Route path="admin" element={<Admin />} />
                 <Route path="create-user" element={<Register />} />
+                <Route path="create-material" element={<CreateMaterial />} />
+                <Route path="create-loading-time" element={<LoadingTime />} />
               </Route>
             </Route>
           </Route>

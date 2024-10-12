@@ -66,7 +66,7 @@ const Users = () => {
                             )
                         }
                     </Grid>
-                ) : <p>No users to display</p>
+                ) : <Typography variant="h5" className="text-center my-4 text-white">Loading...</Typography>
             }
         </article>
     );
