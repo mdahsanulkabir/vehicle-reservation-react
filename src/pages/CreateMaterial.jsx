@@ -6,9 +6,6 @@ import EditIcon from '@mui/icons-material/Edit';
 import DeleteIcon from '@mui/icons-material/Delete';
 import CreateEditMaterialDialogue from "../components/stationAndMaterials/CreateEditMaterialDialogue";
 
-
-
-
 const CreateMaterial = () => {
     const axiosPrivate = useAxiosIntercept();
     const [ materialTypes, setMaterialTypes ] = useState([])
