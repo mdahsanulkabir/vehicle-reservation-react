@@ -5,12 +5,14 @@ import { getSingleLoadUnloadTime } from "./getSingleLoadUnloadTime";
 import { getDockId } from "./getDockId";
 import useAuth from "../../hooks/useAuth";
 import { useState } from "react";
+import { useGetStationsOfMaterials } from "../../hooks/useGetStationsOfMaterials";
 
 
 const ReservationForm = ({ bookingDate, bookingTime, setShowBookingForm, setShowNoAvailableDock, setSummary, material, setMaterial, containerSize, setContainerSize, loadedWithPallete, setLoadedWithPallete, allReservationsOfTheSelectedDate, allDocks, setNewReserv }) => {
     const axiosPrivate = useAxiosIntercept();
     const { auth } = useAuth();
     const [showTimeSelectionError, setShowTimeSelectionError] = useState(false);
+    const stationsOfMaterials = useGetStationsOfMaterials();
 
     const handleMaterialChange = (e) => {
         setMaterial(e.target.value);
@@ -99,10 +101,11 @@ const ReservationForm = ({ bookingDate, bookingTime, setShowBookingForm, setShow
                         label="Material"
                         onChange={e => handleMaterialChange(e)}
                     >
-                        <MenuItem value={"66fd242f704eb147562c84e2"}>Metal Sheet</MenuItem>
-                        <MenuItem value={"66fd2461704eb147562c84e5"}>Ref Parts</MenuItem>
-                        <MenuItem value={"66fd26e5cfb1ce3bb614391c"}>TV parts</MenuItem>
-                        <MenuItem value={"66fd2744cfb1ce3bb6143926"}>Body Stand</MenuItem>
+                        <MenuItem key={"default_blank_in_reservation_form"} value={''}>{''}</MenuItem>
+                        {
+                            stationsOfMaterials?.map( item => <MenuItem key={item._id} value={item._id}>{item.materialType}</MenuItem>)
+                        }
+                        
                     </Select>
                 </FormControl>
                 <br />
