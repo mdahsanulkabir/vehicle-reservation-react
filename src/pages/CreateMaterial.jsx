@@ -52,13 +52,16 @@ const CreateMaterial = () => {
                 <Grid size={2} sx={{textAlign: 'center'}}>
                     <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>SL</Typography>
                 </Grid>
-                <Grid size={4} sx={{textAlign: 'center'}}>
+                <Grid size={3} sx={{textAlign: 'center'}}>
+                    <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>ID</Typography>
+                </Grid>
+                <Grid size={3} sx={{textAlign: 'center'}}>
                     <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>Material Type</Typography>
                 </Grid>
                 <Grid size={2} sx={{textAlign: 'center'}}>
                     <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>Station Type</Typography>
                 </Grid>
-                <Grid size={4} sx={{textAlign: 'center'}}>
+                <Grid size={2} sx={{textAlign: 'center'}}>
                     <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>Action</Typography>
                 </Grid>
                 {
@@ -67,13 +70,16 @@ const CreateMaterial = () => {
                             <Grid size={2} sx={{textAlign: 'center'}}>
                                 <p>{id+1}</p>
                             </Grid>
-                            <Grid size={4}>
+                            <Grid size={3}>
+                                <p>{item._id}</p>
+                            </Grid>
+                            <Grid size={3}>
                                 <p>{item.materialType}</p>
                             </Grid>
                             <Grid size={2} sx={{textAlign: 'center'}}>
                                 <p>{item.stationType}</p>
                             </Grid>
-                            <Grid size={4} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
+                            <Grid size={2} sx={{display: 'flex', justifyContent: 'space-evenly'}}>
                                 <EditIcon />
                                 <DeleteIcon />
                             </Grid>
