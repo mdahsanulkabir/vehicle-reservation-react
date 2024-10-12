@@ -35,7 +35,9 @@ const ReservationForm = ({ bookingDate, bookingTime, setShowBookingForm, setShow
         referenceBookingDate.setUTCHours(0, 0, 0, 0)
         referenceBookingDate.setHours(referenceBookingDate.getHours() - 6);
 
-
+        // i got an error in below line
+        //  Uncaught (in promise) TypeError: Cannot read properties of null (reading 'requiredTime')
+        //  at k (index-D3foXYOh.js:202:23488)
         const availableDockId = getDockId(bookingDateTime, singleLoadUnloadTime.requiredTime, singleLoadUnloadTime.stationForMaterial.stationType, allReservationsOfTheSelectedDate, allDocks)
         if (availableDockId) {
             console.log("Your booking dock is : ", availableDockId)
