@@ -141,9 +141,9 @@ footer {
 .hour-header, 
 .time-slot {
   padding: 0px; /* Reduced padding */
-  max-width: 8px;
+  /* max-width: 8px; */
   text-align: center;
-  border-right: 1px solid #ccc;
+  border-left: 1px solid #ccc;
   font-size: 0.75rem; /* Smaller font size */
 }
 
@@ -152,7 +152,7 @@ footer {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid #ccc;
+  /* border: 1px solid #ccc; */
 }
 
 .time-slot.reserved {

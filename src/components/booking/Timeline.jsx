@@ -2,6 +2,18 @@
 // this component is used to draw timeline
 
 import { Typography } from "@mui/material";
+import TooltipTitle from "./TooltipTitle";
+import Tooltip, { tooltipClasses } from '@mui/material/Tooltip';
+import { styled } from '@mui/material/styles';
+
+const CustomWidthTooltip = styled(({ className, ...props }) => (
+    <Tooltip {...props} classes={{ popper: className }} />
+  ))({
+    [`& .${tooltipClasses.tooltip}`]: {
+      maxWidth: 460,
+    },
+  });
+
 
 export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate }) => {
 
@@ -53,7 +65,7 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
             const currentSlotStartTime = new Date(new Date(bookingDate).setHours(0, 0, 0, 0) + timeSlot * 60 * 1000);
             // const currentSlotStartTime = new Date(new Date('2024-10-27').setHours(0, 0, 0, 0) + timeSlot * 60 * 1000);
 
-
+            let slotReservation = {}
 
             // in the database, the data is primarily divided into docs (1 - 11)
             // below code takes a dock and in that dock - finds the STARTING TIME and ENDING IME of the reservation.
@@ -69,6 +81,9 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
                 //              which means, this time slot is reserved
                 const resStart = new Date(dockReservation.startTime);
                 const resEnd = new Date(dockReservation.endTime);
+                if (currentSlotStartTime >= resStart && currentSlotStartTime < resEnd) {
+                    slotReservation = dockReservation
+                }
                 return currentSlotStartTime >= resStart && currentSlotStartTime < resEnd;
             });
 
@@ -79,12 +94,21 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
             });
 
             return (
-                <div
-                    key={`${dock._id}-${timeSlot}`}
-                    id={`${dock._id}-${timeSlot}`}
-                    className={`time-slot ${isReserved ? 'reserved' : 'available'}`}
-                >
-                    {isStartOfReservation && isReserved ? 'R' : ''}
+                <div key={`${dock._id}-${timeSlot}`} id={`${dock._id}-${timeSlot}`}>
+                    {
+                        isReserved ? (
+                            <CustomWidthTooltip title={<TooltipTitle reservation={slotReservation} />}>
+                                <div className={`time-slot ${isReserved ? 'reserved' : 'available'}`}>
+                                    <p>{isStartOfReservation && isReserved ? 'R' : ''}</p>
+                                </div>
+                            </CustomWidthTooltip>
+                        ) : (
+                            <div className={`time-slot ${isReserved ? 'reserved' : 'available'}`}>
+                                <p>{isStartOfReservation && isReserved ? 'R' : ''}</p>
+
+                            </div>
+                        )
+                    }
                 </div>
             );
         });
