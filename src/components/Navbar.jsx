@@ -4,7 +4,7 @@ import NotificationsOutlinedIcon from "@mui/icons-material/NotificationsOutlined
 import SettingsOutlinedIcon from "@mui/icons-material/SettingsOutlined";
 import { Box, IconButton, Typography } from "@mui/material";
 
-import SearchIcon from "@mui/icons-material/Search";
+// import SearchIcon from "@mui/icons-material/Search";
 import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import useAuth from "../hooks/useAuth";
 import { useNavigate } from "react-router-dom";
@@ -36,12 +36,12 @@ const NavBar = () => {
             />
             <Typography variant='h6' className="">Vehicle Booking App</Typography>
             <div className="flex">
-                <div className="search-bar border-blue-500 border-[1px] rounded-full">
+                {/* <div className="search-bar border-blue-500 border-[1px] rounded-full">
                     <input className="search-text bg-blue-100 " type="text" name="" id="" />
                     <IconButton type="button" sx={{ p: 1 }}>
                         <SearchIcon />
                     </IconButton>
-                </div>
+                </div> */}
                 <div className="icon-group">
                     <IconButton>
                         <DarkModeOutlinedIcon />
