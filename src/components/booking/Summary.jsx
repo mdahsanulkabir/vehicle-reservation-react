@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import { Button, Paper, Typography } from "@mui/material";
 import useAxiosIntercept from "../../hooks/useAxiosIntercept";
+import { useGetStationsOfMaterials } from "../../hooks/useGetStationsOfMaterials";
 
 
-const Summary = ({ setBookingConfirmed, setSummary, setShowBookingForm, allReservationsOfTheSelectedDate, setAllReservationsOfTheSelectedDate, newReserv, bookingDate, bookingTime, material, containerSize, loadedWithPallete, showNoAvailableDock }) => {
+const Summary = ({ setBookingConfirmed, setSummary, setShowBookingForm, allReservationsOfTheSelectedDate, setAllReservationsOfTheSelectedDate, newReserv, bookingDate, bookingTime, material, containerSize, loadedWithPallete, showNoAvailableDock, driverName, driverContactNumber, vehicleRegistrationNumber,duration }) => {
     const axiosPrivate = useAxiosIntercept();
 
-
+    const stationsOfMaterials = useGetStationsOfMaterials();
+    const materialName = stationsOfMaterials.find(mat => mat._id === material)?.materialType
     const handleBack = () => {
         setSummary(false)
         setShowBookingForm(true)
@@ -41,18 +43,18 @@ const Summary = ({ setBookingConfirmed, setSummary, setShowBookingForm, allReser
             {/* <p className="font-bold">For the below object</p> */}
             <div className="flex justify-evenly mt-2">
                 <div className="flex-1 text-center">
-                    <p>Material : <span>{material}</span></p>
+                    <p>Material : <span>{materialName}</span></p>
                     <p>Container Size : <span>{`${containerSize} ft`}</span></p>
                     <p>Loaded with pallete : <span>{loadedWithPallete ? 'Yes' : 'No'}</span></p>
-                    <p>Expected time to unload : <span>{loadedWithPallete ? 'Yes' : 'Undefined'}</span></p>
+                    <p>Expected time to unload : <span>{duration ? duration : 'Undefined'}</span></p>
                 </div>
 
                 {
                     !showNoAvailableDock &&
                     <div className="flex-1 text-center">
-                        <p>Driver Name : <span>Driver name</span></p>
-                        <p>Driver Contact Number : <span>01234 567 890</span></p>
-                        <p>Vehicle Registration Number : <span>xx-xxxx</span></p>
+                        <p>Driver Name : <span>{driverName ? driverName : 'NA'}</span></p>
+                        <p>Driver Contact Number : <span>{driverContactNumber ? driverContactNumber : 'NA'}</span></p>
+                        <p>Vehicle Registration Number : <span>{vehicleRegistrationNumber ? vehicleRegistrationNumber : 'NA'}</span></p>
                     </div>
                 }
             </div>

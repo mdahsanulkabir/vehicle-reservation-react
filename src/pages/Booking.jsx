@@ -18,17 +18,18 @@ const Booking = () => {
     const allBookingCreatedEver = useGetAllBooking(bookingDate, bookingTime);
     const [allReservationsOfTheSelectedDate, setAllReservationsOfTheSelectedDate] = useState([])
     const [showNoAvailableDock, setShowNoAvailableDock] = useState(false)
-    const [material, setMaterial] = useState('')
-    const [containerSize, setContainerSize] = useState(40)
-    const [loadedWithPallete, setLoadedWithPallete] = useState(false)
     const [showBookingForm, setShowBookingForm] = useState(false)
     const [summary, setSummary] = useState(false)
     const [newReserv, setNewReserv] = useState({})
     const [bookingConfirmed, setBookingConfirmed] = useState(false)
     const [goForBooking, setGoForBooking] = useState(false)
+    const [material, setMaterial] = useState('')
+    const [containerSize, setContainerSize] = useState(0)
+    const [loadedWithPallete, setLoadedWithPallete] = useState(false)
     const [driverName, setDriverName] = useState("")
     const [driverContactNumber, setDriverContactNumber] = useState(0)
     const [vehicleRegistrationNumber, setVehicleRegistrationNumber] = useState('')
+    const [ duration, setDuration ] = useState(0)
 
 
     useEffect(() => {
@@ -74,6 +75,7 @@ const Booking = () => {
                     setDriverContactNumber={setDriverContactNumber}
                     vehicleRegistrationNumber={vehicleRegistrationNumber}
                     setVehicleRegistrationNumber={setVehicleRegistrationNumber}
+                    setDuration={setDuration}
 
                 />
             }
@@ -91,6 +93,10 @@ const Booking = () => {
                     setSummary={setSummary}
                     setShowBookingForm={setShowBookingForm}
                     setBookingConfirmed={setBookingConfirmed}
+                    driverName={driverName}
+                    driverContactNumber={driverContactNumber}
+                    vehicleRegistrationNumber={vehicleRegistrationNumber}
+                    duration={duration}
                 />
             }
             {
