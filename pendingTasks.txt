@@ -8,3 +8,4 @@
 8.  Dark theme implementation
 9.  Code refactoring needed for clean coding practice and future upgradation of the app
 10. Dock 17 and 18 need to be implemented
+11. There is no update after the booking. Need to extend the functionality and include parking and unload status integration.
