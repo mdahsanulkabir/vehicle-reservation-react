@@ -21,7 +21,7 @@ const Summary = ({ setBookingConfirmed, setSummary, setShowBookingForm, allReser
                     withCredentials: true
                 }
             );
-            console.log("server data", response.data)
+            console.log("server data of new reservation", response.data)
             const previousbookingData = [...allReservationsOfTheSelectedDate];
             setAllReservationsOfTheSelectedDate([...previousbookingData, { ...response.data }]);
             setBookingConfirmed(true)

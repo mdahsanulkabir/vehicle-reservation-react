@@ -26,13 +26,16 @@ const Booking = () => {
     const [newReserv, setNewReserv] = useState({})
     const [bookingConfirmed, setBookingConfirmed] = useState(false)
     const [goForBooking, setGoForBooking] = useState(false)
-    
+    const [driverName, setDriverName] = useState("")
+    const [driverContactNumber, setDriverContactNumber] = useState(0)
+    const [vehicleRegistrationNumber, setVehicleRegistrationNumber] = useState('')
+
 
     useEffect(() => {
         setAllReservationsOfTheSelectedDate(getReservationsForLocalDate(allBookingCreatedEver, bookingDate))
     }, [allBookingCreatedEver, bookingDate, bookingTime])
 
-    
+
 
     return (
         <>
@@ -65,6 +68,13 @@ const Booking = () => {
                     allReservationsOfTheSelectedDate={allReservationsOfTheSelectedDate}
                     allDocks={allDocks}
                     setNewReserv={setNewReserv}
+                    driverName={driverName}
+                    setDriverName={setDriverName}
+                    driverContactNumber={driverContactNumber}
+                    setDriverContactNumber={setDriverContactNumber}
+                    vehicleRegistrationNumber={vehicleRegistrationNumber}
+                    setVehicleRegistrationNumber={setVehicleRegistrationNumber}
+
                 />
             }
             {

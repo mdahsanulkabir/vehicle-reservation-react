@@ -1,0 +1,10 @@
+1.  Time validation should be done at time selection level. Currently, time validation is done after user provides the reservation data, which is annoying if the validation fails and user has to re-enter the data.
+2.  Email notification
+3.  SMS notification
+4.  User specific notification at the Nav-bar
+5.  Role specific Home screen should be made
+6.  In the backend, concurrency problem should be resolved.
+7.  In the backend, refreshToken garbages should be cleared
+8.  Dark theme implementation
+9.  Code refactoring needed for clean coding practice and future upgradation of the app
+10. Dock 17 and 18 need to be implemented
