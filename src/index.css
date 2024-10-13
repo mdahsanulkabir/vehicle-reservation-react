@@ -138,6 +138,11 @@ footer {
   border-bottom: 1px solid #ccc;
 }
 
+.dock-row-5{
+  grid-template-columns: 100px repeat(288, 1fr);
+}
+
+
 .hour-header, 
 .time-slot {
   padding: 0px; /* Reduced padding */

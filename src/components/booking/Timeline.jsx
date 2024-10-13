@@ -33,7 +33,11 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
     // console.log(allReservationsOfTheSelectedDate)
     // const docks = allReservationsOfTheSelectedDate        // docks = reservation array of the selected date
     // Generate all 15-minute intervals for a day (0 to 95)
-    const timeSlots = Array.from({ length: 96 }, (_, i) => i * 15); // Each index represents a 15-minute interval
+
+
+    //const timeSlots = Array.from({ length: 96 }, (_, i) => i * 15); // Each index represents a 15-minute interval
+
+
     // console.log(timeSlots)
     // a day is divided in to 15 minutes for each time slots, so there are 96 time slots 
     //   [
@@ -56,7 +60,13 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
     // This function is returning a div with color and text, 
     // based on the condition that this unit slot is reserved or not.
     // a slot is represented as a unit of whole day (for station A and B, it's 15 minute)
-    const renderSlots = (dock) => {
+    const renderDock = (dock) => {
+        let timeSlots = []
+        if(dock.stationType === 'C'){
+            timeSlots = Array.from({ length: 24*12 }, (_, i) => i * 5);
+        } else {
+            timeSlots = Array.from({ length: 96 }, (_, i) => i * 15);
+        }
         return timeSlots.map((timeSlot) => {
 
             // iteration is based on checking status of each timeSlot
@@ -131,9 +141,9 @@ export const Timeline = ({ allReservationsOfTheSelectedDate, docks, bookingDate 
                 {
                     reservationsAsPerDocks.map((dock) => {
                         return (
-                            <div key={dock._id} className="dock-row">
+                            <div key={dock._id} className={`dock-row ${dock.stationType === 'C' ? 'dock-row-5': ''} `}>
                                 <div className="dock-name">{`Dock ${dock.dockNumber}`}</div>
-                                {renderSlots(dock)}
+                                {renderDock(dock)}
                             </div>
                         )
                     })

@@ -20,4 +20,5 @@ The available values are ``.
     at SelectInput2 
 
 
-13. 
+13. previous date selection should be protected
+14. timeslots width should be changed for station C
