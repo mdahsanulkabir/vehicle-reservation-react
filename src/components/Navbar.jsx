@@ -15,6 +15,7 @@ import logo from "../../src/assets/logo.svg"
 
 const NavBar = () => {
     const { setAuth, setPersist } = useAuth();
+    
     const navigate = useNavigate();
     const logOut = () => {
         setAuth(authInitialValue);

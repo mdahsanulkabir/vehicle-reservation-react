@@ -89,7 +89,7 @@ const Login = () => {
                 {
                     serverRestarting ? (
                         <>
-                        <Typography variant="h6" color="error" className="text-center my-4">{`Server is starting (wait 1 minute)`}</Typography>
+                        <Typography variant="h6" color="error" className="text-center my-4">{`Server is re-starting ...`}</Typography>
                         <div className="flex justify-center">
                             <CircularProgress />
                         </div>

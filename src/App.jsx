@@ -11,6 +11,7 @@ import Booking from "./pages/Booking";
 import Register from "./pages/Register";
 import CreateMaterial from "./pages/CreateMaterial";
 import LoadingTime from "./pages/LoadingTime";
+import PasswordChange from "./pages/PasswordChange";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="/" element={<Layout />}>
               <Route index element={<Home />} />
               <Route path="booking" element={<Booking />} />
+              <Route path="change-password" element={<PasswordChange />} />
 
               <Route element={<RequireAuth allowedRoles={[import.meta.env.VITE_ADMIN_ROLE]} />}>
                 <Route path="admin" element={<Admin />} />

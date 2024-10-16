@@ -3,12 +3,14 @@ import useAxiosPrivate from "../hooks/useAxiosIntercept";
 import { useNavigate, useLocation } from "react-router-dom";
 import Grid from '@mui/material/Grid2';
 import { Typography } from "@mui/material";
+import Loading from "./Loading";
 
 const Users = () => {
     const [users, setUsers] = useState();
     const axiosPrivate = useAxiosPrivate();
     const navigate = useNavigate();
     const location = useLocation();
+    const [ loading, setLoading ] = useState(true)
 
     useEffect(() => {
 
@@ -18,6 +20,7 @@ const Users = () => {
                 });
                 console.log(response.data);
                 setUsers(response.data);
+                setLoading(false)
             } catch (err) {
                 console.error(err);
                 navigate('/login', { state: { from: location }, replace: true });
@@ -32,7 +35,7 @@ const Users = () => {
                 <Typography variant="h5" className="text-center my-4 text-white">User List</Typography>
             </div>
             <br />
-            {users?.length
+            {!loading
                 ? (
                     <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                         <Grid size={3}>
@@ -66,7 +69,7 @@ const Users = () => {
                             )
                         }
                     </Grid>
-                ) : <Typography variant="h5" className="text-center my-4 text-white">Loading...</Typography>
+                ) : <Loading loadingText={'Loading user list...'}/>
             }
         </article>
     );

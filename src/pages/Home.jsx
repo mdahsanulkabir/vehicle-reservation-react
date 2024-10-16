@@ -10,6 +10,7 @@ const Home = () => {
                 <li><Link to="/booking">Create a reservation</Link></li>
                 <li><Link to="/create-material">Create Material and Assign to Station</Link></li>
                 <li><Link to="/create-loading-time">Create loading time based on material, container size and pallete status</Link></li>
+                <li className="my-4"><Link to="/change-password">Change Password</Link></li>
             </ul>
         </div>
     );
