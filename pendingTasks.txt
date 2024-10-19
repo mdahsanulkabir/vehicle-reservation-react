@@ -1,0 +1,22 @@
+         1.  There is an error while creating new duration
+             loadmaterials error:  TypeError: requiredTime is not a function
+             at saveNewMaterialStation (DurationDialogue.jsx:72:21)
+         2.  While creating new duration, duplicates will not allowed in frontend and backend
+         3.  Validaton needed at "Proceed for booking". I found ,without selecting container size, the button can be pushed
+         4.  Email notification
+         5.  SMS notification
+         6.  User specific notification at the Nav-bar
+         7.  Role specific Home screen should be made
+         8.  In the backend, concurrency problem should be resolved.
+         9.  In the backend, refreshToken garbages should be cleared
+         10. Dark theme implementation
+         11. Code refactoring needed for clean coding practice and future upgradation of the app
+Done     12. Dock 17 and 18 need to be implemented
+         13. There is no update after the booking. Need to extend the functionality and include parking and unload status integration.
+         14. A warning happening, when we "PROCEED FOR BOOKING" but later select "BACK"
+             MUI: You have provided an out-of-range value `66fd2723cfb1ce3bb6143922` for the select component.
+             Consider providing a value that matches one of the available options or ''.
+             The available values are ``. 
+             at SelectInput2 
+         15. previous date selection should be protected
+Done     16. timeslots width should be changed for station C
