@@ -20,3 +20,5 @@ Done     12. Dock 17 and 18 need to be implemented
              at SelectInput2 
          15. previous date selection should be protected
 Done     16. timeslots width should be changed for station C
+critical 17. while creating new duration, previous entry posting automatically
+moderate 18. while editing duration, the edited duration went to last

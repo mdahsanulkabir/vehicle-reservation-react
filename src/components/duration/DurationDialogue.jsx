@@ -107,6 +107,7 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
                         <InputLabel id="select-material-label">Select Material</InputLabel>
                         <Select
                             labelId="select-material-label"
+                            label='Select Material'
                             id="select-material"
                             value={stationForMaterial}
                             onChange={e => setStationForMaterial(e.target.value)}
@@ -126,6 +127,7 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
                         <InputLabel id="select-container-size-label">Select Container Size</InputLabel>
                         <Select
                             labelId="select-container-size-station-label"
+                            label='Select Container Size'
                             id="select-container-size"
                             value={containerSize}
                             onChange={e => setContainerSize(e.target.value)}
@@ -143,6 +145,7 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
                         <InputLabel id="select-loaded-pallete-label">Loaded with pallete</InputLabel>
                         <Select
                             labelId="select-loaded-pallete-label"
+                            label='Loaded with pallete'
                             id="select-loaded-pallete"
                             value={loadedWithPallete}
                             onChange={e => setLoadedWithPallete(e.target.value)}

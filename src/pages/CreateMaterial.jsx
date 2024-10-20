@@ -44,7 +44,7 @@ const CreateMaterial = () => {
 
 
     return (
-        <div id="create-material">
+        <div id="create-material" className="flex flex-col max-h-full">
             <div className="flex justify-between">
                 <p>List of Materials</p>
                 <Button variant="contained" onClick={() => handleOpenCreateEditMaterialDialogue()}>Create Material</Button>
@@ -70,6 +70,8 @@ const CreateMaterial = () => {
                         <Grid size={2} sx={{textAlign: 'center'}}>
                             <Typography sx={{ fontSize: '16px', fontWeight: 'bold'}}>Action</Typography>
                         </Grid>
+                    </Grid>
+                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className='flex-1 overflow-y-auto'>    
                         {
                             materialTypes?.map((item, id) =>
                                 <React.Fragment key={item._id}>
