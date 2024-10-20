@@ -79,7 +79,7 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
         return () => {
             controller.abort(); // Cancel the API call
         };
-    }, [axiosPrivate, newDuration])
+    }, [axiosPrivate, newDuration, requiredTime, setDurations])
 
     const handleClose = () => {
         setDialogueOpen(false)

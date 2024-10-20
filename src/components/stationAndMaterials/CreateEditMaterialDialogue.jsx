@@ -85,8 +85,8 @@ const CreateEditMaterialDialogue = ({ mode = 'Create', setDialogueOpen, dialogue
                             <MenuItem value={"B"}>B</MenuItem>
                             <MenuItem value={"C"}>C</MenuItem>
                             <MenuItem value={"D"}>D</MenuItem>
-                            {/* <MenuItem value={"E"}>E</MenuItem>
-                            <MenuItem value={"F"}>F</MenuItem> */}
+                            <MenuItem value={"E"}>E</MenuItem>
+                            <MenuItem value={"F"}>F</MenuItem>
                         </Select>
                     </FormControl>
                 </div>
