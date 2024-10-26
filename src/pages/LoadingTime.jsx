@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import useAxiosIntercept from "../hooks/useAxiosIntercept";
 import { Button, Typography } from "@mui/material";
 import Grid from '@mui/material/Grid2';
@@ -67,7 +67,7 @@ const LoadingTime = () => {
 
     const handleEditDuration = (id) => {
         const durationToBeEdited = durations.find(duration => duration._id === id)
-        console.log({durationToBeEdited})
+        console.log({ durationToBeEdited })
         setEditDuration(durationToBeEdited)
         setEditDialogueOpen(true)
     }
@@ -85,7 +85,7 @@ const LoadingTime = () => {
                 !loading ? (
                     <>
                         {/* material table - column: Sl, material type, station type, loaded with pallete, required time, action*/}
-                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
+                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className='border-y-2 border-blue-900'>
                             <Grid size={1} sx={{ textAlign: 'center' }}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>SL</Typography>
                             </Grid>
@@ -95,33 +95,33 @@ const LoadingTime = () => {
                             <Grid size={3} sx={{ textAlign: 'center' }}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>Material Type</Typography>
                             </Grid>
-                            <Grid size={1} sx={{ textAlign: 'center' }}>
+                            <Grid size={1} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>Station Type</Typography>
                             </Grid>
-                            <Grid size={1} sx={{ textAlign: 'center' }}>
+                            <Grid size={1} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>{`Container Size (ft)`}</Typography>
                             </Grid>
-                            <Grid size={1} sx={{ textAlign: 'center' }}>
+                            <Grid size={1} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>With Pallete</Typography>
                             </Grid>
-                            <Grid size={1} sx={{ textAlign: 'center' }}>
+                            <Grid size={1} sx={{display: 'flex', alignItems: 'center', justifyContent: 'center'}}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>{`Duration (minute)`}</Typography>
                             </Grid>
                             <Grid size={1} sx={{ textAlign: 'center' }}>
                                 <Typography sx={{ fontSize: '16px', fontWeight: 'bold' }}>Action</Typography>
                             </Grid>
                         </Grid>
-                        <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} className='flex-1 overflow-y-auto'>
+                        <div className='flex-1 overflow-y-auto scrollbar-hidden'>
                             {
                                 durations?.map((item, id) =>
-                                    <React.Fragment key={item._id}>
+                                    <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }} key={item._id} className='hover:bg-blue-100 py-1'>
                                         <Grid size={1} sx={{ textAlign: 'center' }}>
                                             <p>{id + 1}</p>
                                         </Grid>
                                         <Grid size={3} sx={{ textAlign: 'center' }}>
                                             <p>{item._id}</p>
                                         </Grid>
-                                        <Grid size={3} sx={{ textAlign: 'center' }}>
+                                        <Grid size={3} sx={{ textAlign: 'left' }}>
                                             <p>{item.stationForMaterial.materialType}</p>
                                         </Grid>
                                         <Grid size={1} sx={{ textAlign: 'center' }}>
@@ -138,13 +138,13 @@ const LoadingTime = () => {
                                             <p>{item.requiredTime}</p>
                                         </Grid>
                                         <Grid size={1} sx={{ display: 'flex', justifyContent: 'space-evenly' }}>
-                                            <EditIcon className="cursor-pointer" onClick={() => handleEditDuration(item._id)}/>
-                                            <DeleteIcon className="cursor-pointer" onClick={() => handleDelete(item._id)} />
+                                            <EditIcon className="cursor-pointer hover:text-blue-500 hover:scale-125" onClick={() => handleEditDuration(item._id)} />
+                                            <DeleteIcon className="cursor-pointer hover:text-red-500 hover:scale-125" onClick={() => handleDelete(item._id)} />
                                         </Grid>
-                                    </React.Fragment>
+                                    </Grid>
                                 )
                             }
-                        </Grid>
+                        </div>
 
                     </>
                 ) : <Loading loadingText={'Loading existing duration list...'} />
