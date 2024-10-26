@@ -76,6 +76,7 @@ const CreateEditMaterialDialogue = ({ mode = 'Create', setDialogueOpen, dialogue
                         <InputLabel id="select-station-label">Select Station</InputLabel>
                         <Select
                             labelId="select-station-label"
+                            label='Select Station'
                             id="select-material"
                             value={stationName}
                             onChange={e => setStationName(e.target.value)}
