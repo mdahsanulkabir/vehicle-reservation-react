@@ -1,5 +1,5 @@
 /* eslint-disable react/prop-types */
-import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Button, Typography, Backdrop, Paper, TextField } from "@mui/material";
+import { Checkbox, FormControl, FormControlLabel, InputLabel, MenuItem, Select, Button, Typography, Backdrop, Paper, TextField, Autocomplete } from "@mui/material";
 import useAxiosIntercept from "../../hooks/useAxiosIntercept";
 import { getSingleLoadUnloadTime } from "./getSingleLoadUnloadTime";
 import { getDockId } from "./getDockId";
@@ -45,19 +45,19 @@ const ReservationForm = ({ vehicleRegistrationNumber, setVehicleRegistrationNumb
 
     // get the materials available only in the duration table
     useEffect(() => {
-        if(materialContainerPalleteTime.length > 0) {
+        if (materialContainerPalleteTime.length > 0) {
             let uniqueMaterials = []   // an array of objects {_id, materialType, stationType}
 
-            materialContainerPalleteTime?.forEach( item => {
-                if(uniqueMaterials.length === 0){
-                    uniqueMaterials.push({ 
+            materialContainerPalleteTime?.forEach(item => {
+                if (uniqueMaterials.length === 0) {
+                    uniqueMaterials.push({
                         _id: item.stationForMaterial._id,
                         materialType: item.stationForMaterial.materialType,
                         stationType: item.stationForMaterial.stationType
                     })
                 } else {
                     !uniqueMaterials.find(existingItem => existingItem._id === item.stationForMaterial._id) && (
-                        uniqueMaterials.push({ 
+                        uniqueMaterials.push({
                             _id: item.stationForMaterial._id,
                             materialType: item.stationForMaterial.materialType,
                             stationType: item.stationForMaterial.stationType
@@ -67,7 +67,7 @@ const ReservationForm = ({ vehicleRegistrationNumber, setVehicleRegistrationNumb
             })
             setUniqueMaterialsInDurations(uniqueMaterials)
         }
-    },[materialContainerPalleteTime])
+    }, [materialContainerPalleteTime])
 
     // get the container sizes of the selected material
     useEffect(() => {
@@ -102,7 +102,7 @@ const ReservationForm = ({ vehicleRegistrationNumber, setVehicleRegistrationNumb
                     console.log("hitted useEffect with material", item.loadedWithPallete)
                 }
             })
-            if(palleteOptions.length === 1) {
+            if (palleteOptions.length === 1) {
                 setLoadedWithPallete(palleteOptions[0])
             }
             setPalleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial(palleteOptions)
@@ -204,21 +204,20 @@ const ReservationForm = ({ vehicleRegistrationNumber, setVehicleRegistrationNumb
             <form className="w-1/2 my-8 mx-auto border-2 p-4 rounded-md">
                 <Typography variant="h6" className="text-center pb-4">Provide your reservation information</Typography>
                 <FormControl fullWidth>
-                    <InputLabel id="select-material-label">Select material type</InputLabel>
-                    <Select
-                        labelId="select-material-label"
-                        id="select-material"
-                        value={material}
-                        label="Select material type"
-                        onChange={e => setMaterial(e.target.value)}
-                        size="small"
-                    >
-                        <MenuItem key={"default_blank_in_reservation_form"} value={''}>{''}</MenuItem>
-                        {
-                            uniqueMaterialsInDurations?.map(item => <MenuItem key={item._id} value={item._id}>{item.materialType}</MenuItem>)
-                        }
-
-                    </Select>
+                    <Autocomplete
+                        options={uniqueMaterialsInDurations}
+                        getOptionLabel={(option) => option.materialType}
+                        value={uniqueMaterialsInDurations.find(item => item._id === material) || null}
+                        onChange={(event, newValue) => setMaterial(newValue?._id || '')}
+                        renderInput={(params) => (
+                            <TextField {...params} label="Select material type" variant="outlined" size="small" />
+                        )}
+                        sx={{
+                            '& .MuiAutocomplete-listbox li:hover': {
+                                backgroundColor: '#e0f7fa'  // Custom hover color
+                            }
+                        }}
+                    />
                 </FormControl>
                 <br />
                 {
@@ -256,56 +255,56 @@ const ReservationForm = ({ vehicleRegistrationNumber, setVehicleRegistrationNumb
                 {
                     material && containerSizesOnBasisOfMaterial.length > 0 && palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length > 0 && (
                         <>
-                        {
-                            palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 2 && (
-                                <>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loadedWithPallete}
-                                            onChange={e => setLoadedWithPallete(e.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
+                            {
+                                palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 2 && (
+                                    <>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={loadedWithPallete}
+                                                    onChange={e => setLoadedWithPallete(e.target.checked)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            }
+                                            label="Loaded wtih pallete"
                                         />
-                                    }
-                                    label="Loaded wtih pallete"
-                                />
-                                </>
-                            )
-                        }
-                        {
-                            palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 1 && palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial[0] && (
-                                <>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loadedWithPallete}
-                                            disabled
-                                            onChange={e => setLoadedWithPallete(e.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
+                                    </>
+                                )
+                            }
+                            {
+                                palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 1 && palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial[0] && (
+                                    <>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={loadedWithPallete}
+                                                    disabled
+                                                    onChange={e => setLoadedWithPallete(e.target.checked)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            }
+                                            label="Loaded wtih pallete (Yes)"
                                         />
-                                    }
-                                    label="Loaded wtih pallete (Yes)"
-                                />
-                                </>
-                            )
-                        }
-                        {
-                            palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 1 && !palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial[0] && (
-                                <>
-                                <FormControlLabel
-                                    control={
-                                        <Checkbox
-                                            checked={loadedWithPallete}
-                                            disabled
-                                            onChange={e => setLoadedWithPallete(e.target.checked)}
-                                            inputProps={{ 'aria-label': 'controlled' }}
+                                    </>
+                                )
+                            }
+                            {
+                                palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial.length === 1 && !palleteOptionsOntTheBasisof_ContainerSizesOnBasisOfMaterial[0] && (
+                                    <>
+                                        <FormControlLabel
+                                            control={
+                                                <Checkbox
+                                                    checked={loadedWithPallete}
+                                                    disabled
+                                                    onChange={e => setLoadedWithPallete(e.target.checked)}
+                                                    inputProps={{ 'aria-label': 'controlled' }}
+                                                />
+                                            }
+                                            label="Loaded wtih pallete (No)"
                                         />
-                                    }
-                                    label="Loaded wtih pallete (No)"
-                                />
-                                </>
-                            )
-                        }
+                                    </>
+                                )
+                            }
                         </>
                     )
                 }

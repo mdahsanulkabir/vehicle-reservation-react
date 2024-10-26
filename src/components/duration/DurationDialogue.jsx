@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import useAxiosIntercept from '../../hooks/useAxiosIntercept';
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Button, FormControl, InputLabel, MenuItem, Select, TextField, Autocomplete } from '@mui/material';
 
 
 // {
@@ -16,11 +16,7 @@ import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@m
 
 const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newDuration, setNewDuration, setDurations }) => {
     const axiosPrivate = useAxiosIntercept();
-
     const [materialsAsStations, setMaterialsAsStations] = useState([])
-
-
-
     const [stationForMaterial, setStationForMaterial] = useState("") // need to initiate with real stationformaterial
     const [containerSize, setContainerSize] = useState(40)
     const [loadedWithPallete, setLoadedWithPallete] = useState(false)
@@ -97,30 +93,29 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
 
     return (
         <Dialog onClose={handleClose} open={dialogueOpen} sx={{ padding: '24px' }}>
-            <DialogTitle className='testing'
+            <DialogTitle className='testing text-center'
                 sx={{ padding: '12px 66px', color: '#d3e2f1', backgroundColor: '#1976d2' }}
             >{`${mode} Duration`}</DialogTitle>
 
             <div className='p-8'>
                 <div className='flex flex-col'>
                     <FormControl >
-                        <InputLabel id="select-material-label">Select Material</InputLabel>
-                        <Select
-                            labelId="select-material-label"
-                            label='Select Material'
-                            id="select-material"
-                            value={stationForMaterial}
-                            onChange={e => setStationForMaterial(e.target.value)}
-                            size='small'
-                        >
-                            <MenuItem key={"defaultBlank"} value={""}></MenuItem>
-                            {
-                                materialsAsStations?.map(item => {
-                                    const materialDisplayName = item.materialType
-                                    return <MenuItem key={item._id} value={item._id}>{materialDisplayName}</MenuItem>
-                                })
-                            }
-                        </Select>
+                        <Autocomplete
+                            disablePortal={false}
+                            options={materialsAsStations}
+                            sx={{ width: 300 }}
+                            getOptionLabel={(option) => option.materialType || ''}
+                            value={materialsAsStations.find(item => item._id === stationForMaterial) || null}
+                            onChange={(event, newValue) => setStationForMaterial(newValue ? newValue._id : '')}
+                            renderInput={(params) => (
+                                <TextField {...params} label="Select Material" size="small" className='text-[10px]' />
+                            )}
+                            renderOption={(props, option) => (
+                                <li {...props} key={option._id} className='hover:bg-sky-500 my-1 px-4'>
+                                    {option.materialType}
+                                </li>
+                            )}
+                        />
                     </FormControl>
                     <br />
                     <FormControl >
@@ -152,8 +147,8 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
                             size='small'
                         >
 
-                                <MenuItem value={true}>Yes</MenuItem>
-                                <MenuItem value={false}>No</MenuItem>
+                            <MenuItem value={true}>Yes</MenuItem>
+                            <MenuItem value={false}>No</MenuItem>
 
                         </Select>
                     </FormControl>
