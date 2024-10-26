@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import DialogTitle from '@mui/material/DialogTitle';
 import Dialog from '@mui/material/Dialog';
-import { Button, FormControl, InputLabel, MenuItem, Select, TextField } from '@mui/material';
+import { Autocomplete, Button, FormControl, TextField } from '@mui/material';
 import { useEffect, useState } from 'react';
 import useAxiosIntercept from '../../hooks/useAxiosIntercept';
 
@@ -10,6 +10,8 @@ const CreateEditMaterialDialogue = ({ mode = 'Create', setDialogueOpen, dialogue
     const [matType, setMatType] = useState('')
     const [stationName, setStationName] = useState('')
     const axiosPrivate = useAxiosIntercept();
+
+    const stationOptions = ["A", "B", "C", "D", "E", "F"];
 
     useEffect(() => {
         const controller = new AbortController(); // Used for cancelling the request
@@ -73,22 +75,14 @@ const CreateEditMaterialDialogue = ({ mode = 'Create', setDialogueOpen, dialogue
                     />
                     <br />
                     <FormControl >
-                        <InputLabel id="select-station-label">Select Station</InputLabel>
-                        <Select
-                            labelId="select-station-label"
-                            label='Select Station'
-                            id="select-material"
-                            value={stationName}
-                            onChange={e => setStationName(e.target.value)}
-                            size='small'
-                        >
-                            <MenuItem value={"A"}>A</MenuItem>
-                            <MenuItem value={"B"}>B</MenuItem>
-                            <MenuItem value={"C"}>C</MenuItem>
-                            <MenuItem value={"D"}>D</MenuItem>
-                            <MenuItem value={"E"}>E</MenuItem>
-                            <MenuItem value={"F"}>F</MenuItem>
-                        </Select>
+                    <Autocomplete
+                        options={stationOptions}
+                        value={stationName}
+                        onChange={(event, newValue) => setStationName(newValue)}
+                        renderInput={(params) => (
+                            <TextField {...params} label="Select Station" variant="outlined" size="small" />
+                        )}
+                    />
                     </FormControl>
                 </div>
                 <div className='flex justify-center pt-8'>

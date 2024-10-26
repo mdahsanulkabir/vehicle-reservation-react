@@ -31,6 +31,18 @@ const SelectDate = ({ goForBooking, setGoForBooking, setShowBookingForm, booking
                     bookingDate && !goForBooking && <div className="flex justify-center ">
                         <Button variant="contained" onClick={() => {setGoForBooking(true); setBookingTime("")}}>Create a Reservation</Button>
                     </div>
+                    
+                }
+                {
+                    bookingDate && goForBooking && <div className="flex justify-center ">
+                        <Button variant="contained" color='error' onClick={() => {
+                            setGoForBooking(false); 
+                            setBookingTime("");
+                            setShowBookingForm(false);
+                            setSummary(false)
+                        }}>Cancel Reservation</Button>
+                    </div>
+                    
                 }
             </div>
 

@@ -111,7 +111,7 @@ const DurationDialogue = ({ mode = 'Create', dialogueOpen, setDialogueOpen, newD
                                 <TextField {...params} label="Select Material" size="small" className='text-[10px]' />
                             )}
                             renderOption={(props, option) => (
-                                <li {...props} key={option._id} className='hover:bg-sky-500 my-1 px-4'>
+                                <li {...props} key={option._id} className='hover:bg-blue-100 my-1 px-4'>
                                     {option.materialType}
                                 </li>
                             )}
